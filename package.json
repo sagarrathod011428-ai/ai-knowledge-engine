@@ -21,3 +21,26 @@
     "tailwindcss": "3.4.3"
   }
 }
+```
+
+**Commit changes.**
+
+---
+
+## After All 3 Fixes Committed
+
+Vercel will auto-redeploy. Then:
+
+1. Go to Vercel → **Deployments**
+2. Click the new deployment
+3. Scroll to bottom of **Build Logs**
+4. Also expand **"Deployment Summary"**
+5. Screenshot and send to me
+
+---
+
+## Quick Summary of What You Need to Edit
+```
+File 1 → utils/pdfParser.js    ← replace fully
+File 2 → next.config.js        ← replace fully  
+File 3 → package.json          ← replace fully
