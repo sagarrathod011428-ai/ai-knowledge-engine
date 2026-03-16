@@ -1,7 +1,7 @@
 export async function extractTextFromPDF(buffer) {
-  const pdfParse = (await import('pdf-parse')).default;
-
   try {
+    // Dynamically import to prevent webpack bundling issues
+    const pdfParse = require('pdf-parse');
     const data = await pdfParse(buffer);
     const rawText = data.text || '';
 
@@ -12,7 +12,7 @@ export async function extractTextFromPDF(buffer) {
       .trim();
 
     if (!cleanedText) {
-      throw new Error('No readable text found in this PDF. It may be scanned or image-based.');
+      throw new Error('No readable text found. PDF may be image-based.');
     }
 
     return {
@@ -34,7 +34,9 @@ export function getRelevantContext(fullText, question, maxChars = 3500) {
     .split(' ')
     .filter((w) => w.length > 3);
 
-  const paragraphs = fullText.split('\n\n').filter((p) => p.trim().length > 30);
+  const paragraphs = fullText
+    .split('\n\n')
+    .filter((p) => p.trim().length > 30);
 
   const scored = paragraphs.map((para) => {
     const paraLower = para.toLowerCase();
